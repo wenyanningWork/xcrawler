@@ -1,24 +1,25 @@
-xcrawler, a light-weight web crawler framework
+# xcrawler, a light-weight web crawler framework
 ------------------------
 
 # Introduction
-`xcrawler`, it's a light-weight web crawler framework. Some of it's design ideas are borrowed from the [Scrapy](https://github.com/scrapy) framework.
+xcrawler, it's a light-weight web crawler framework. Some of its design concepts are borrowed from the well-known framework [Scrapy](https://github.com/scrapy).
 The downloader of the engine is implemented with the `requests` library. There are two different thread pools in the crawler's engine, one is for the
 downloader and the other for the processors (to extract data and so on).
 
-The reason I wrote this simple framework is for learning purpose.
+I'm very interested in web crawling, however, I'm just a newbie to web scraping. I did this so that I can learn more basics of web crawling and Python language.
+
 
 
 # Features
-- Support plugins (middlewares) and pipelines;
-- Very easy to customize your own spider;
-- Process multiple requests and responses simultaneously.
+- [x] Support plugins (middlewares) and pipelines;
+- [x] Very easy to customize your own spider;
+- [x] Process multiple requests and responses simultaneously.
 
 # TO-DO
-- Add more middlewares;
-- Use priority_queue instead;
-- Add command line support;
-- Add docs and tests.
+- [ ] Add more middlewares;
+- [ ] Use priority_queue instead;
+- [ ] Add command line support;
+- [ ] Add docs and tests.
 
 # Examples
 ```
@@ -44,5 +45,5 @@ main()
 ```
 
 # License
-`xcrawler` is licensed under the MIT license, please feel free and happy crawling!
+xcrawler is licensed under the MIT license, please feel free and happy crawling!
 
