@@ -49,7 +49,7 @@ class CrawlerEngine(object):
         self.status = False
         self.concurrent_requests = concurrent_requests
         self.download_delay = download_delay
-        self.engine_idle_timeout = 2 * download_timeout
+        self.engine_idle_timeout = 1.5 * download_timeout
         self.download_timeout = download_timeout
         self.retry_on_download_timeout = retry_on_timeout
         self._requests_queue = Queue(queue_size)
@@ -113,7 +113,7 @@ class CrawlerEngine(object):
         This method will be invoked when there's no more requests in the queue.
         :return: None
         """
-        self.logger.info('Crawler engine is in idle mode')
+        self.logger.debug('Crawler engine is in idle mode')
 
         # tell the spiders that the engine is in idle mode
         self.__call_func_in_spiders('spider_idle')
@@ -244,12 +244,13 @@ class CrawlerEngine(object):
                              proxies={'http': request.proxy, 'https': request.proxy})
 
             self._responses_queue.put((Response(r.url, r.status_code, r.content, request), spider))
-        except requests.ReadTimeout:
+        except requests.ReadTimeout or requests.ConnectTimeout:
             if self.retry_on_download_timeout:
                 self.logger.debug('Read timed out, retry request {}'.format(request))
                 self.crawl(request, spider)
 
         except Exception as err:
+            print(type(err))
             self.logger.error(err)
 
     def _next_requests_batch(self):

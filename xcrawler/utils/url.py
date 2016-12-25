@@ -21,7 +21,6 @@ def url_fingerprint(url):
 
 
 def safe_url(url, remove_empty_query=True):
-    print(url)
     scheme, netloc, path, query, fragment = urlsplit(url)
 
     if not query:
