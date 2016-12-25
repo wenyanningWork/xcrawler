@@ -1,27 +1,21 @@
-xcrawler, a light-weight web crawler framework
-------------------------
+#!/usr/bin/env python3
+# -*-coding: utf-8-*-
+# Author : Christopher Lee
+# License: MIT License
+# File   : baidu_news.py
+# Date   : 2016-12-25 11:46
+# Version: 0.0.1
+# Description: crawl news in `http://news.baidu.com/`
 
-# Introduction
-`xcrawler`, it's a light-weight web crawler framework. Some of its design concepts are borrowed from the well-known framework [Scrapy](https://github.com/scrapy).
-The downloader of the engine is implemented with the `requests` library. There are two different thread pools in the crawler's engine, one is for the
-downloader and the other for the processors (to extract data and so on).
+from xcrawler import CrawlerProcess
+from xcrawler.spider import BaseSpider, Request
+from lxml.html import fromstring
+import json
 
-I'm very interested in web crawling, however, I'm just a newbie to web scraping. I did this so that I can learn more basics of web crawling and Python language.
+__version__ = '0.0.1'
+__author__ = 'Chris'
 
 
-
-# Features
-- Very simple;
-- Very easy to customize your own spider;
-- Process multiple requests and responses simultaneously.
-
-# TO-DO
-- [ ] Use priority queue instead;
-- [ ] Add more use cases;
-- [ ] Add docs and tests.
-
-# Examples
-```
 class BaiduNewsSpider(BaseSpider):
     name = 'baidu_news_spider'
     start_urls = ['http://news.baidu.com/']
@@ -37,7 +31,7 @@ class BaiduNewsSpider(BaseSpider):
         self.file.close()
 
     def spider_idle(self):
-        # you can add new requests to the engine
+        # 引擎空闲时，你也可以从数据库中提取新的 URL 进来
         print('I am in idle mode')
         # self.crawler.crawl(new_request, spider=self)
 
@@ -83,13 +77,6 @@ def main():
     crawler.crawl(BaiduNewsSpider)
     crawler.start()
 
-main()
-```
 
-- ![log](http://blog.chriscabin.com/wp-content/uploads/2016/12/working.png)
-
-- ![results](http://blog.chriscabin.com/wp-content/uploads/2016/12/results.png)
-
-# License
-`xcrawler` is licensed under the MIT license, please feel free and happy crawling!
-
+if __name__ == '__main__':
+    main()

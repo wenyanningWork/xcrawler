@@ -16,7 +16,7 @@ if sys.version_info < (3, 4):
 
 setup(
     name='xcrawler',
-    version='0.0.1',
+    version='0.0.2',
     packages=['xcrawler'],
     install_requires=['requests'],
     url='https://www.github.com/chrisleegit/xcrawler',
